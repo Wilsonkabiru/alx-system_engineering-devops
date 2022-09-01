@@ -1,1 +1,1 @@
-Bye Bye My First Directory
+a script that changes a working directory to the previous one
