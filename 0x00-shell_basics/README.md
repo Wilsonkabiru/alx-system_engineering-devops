@@ -1,1 +1,1 @@
-Delete the file betty
+Bye Bye My First Directory
