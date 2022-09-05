@@ -1,1 +1,1 @@
-0x02 Shell Input Output redirections and filters
+A script that prints Hello, world followed by a new line of output
