@@ -1,2 +1,1 @@
-#!/bin/bash
--type d -print | wc -l
+#!/bin/bash\nfind ./* -type d -print | wc -l
