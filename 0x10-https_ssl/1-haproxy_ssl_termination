@@ -33,18 +33,18 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 
-frontend  ehoneah-frontend-http
+frontend  cwilson-frontend-http
         bind *:80
         mode http
 	http-request set-header X-Forwarded-Proto http
-        default_backend ehoneah-backend
+        default_backend cwilson-backend
 
-frontend ehoneah-frontend-https
-	bind *:443 ssl crt /etc/haproxy/certs/www.ehoneah.tech.pem
+frontend cwilson-frontend-https
+	bind *:443 ssl crt /etc/haproxy/certs/www.cwilson.tech.pem
 	http-request set-header X-Forwarded-Proto https
-	default_backend ehoneah-backend
+	default_backend cwilson-backend
 
-backend ehoneah-backend
+backend cwilson-backend
         balance roundrobin
         server 129957-web-01 54.157.154.89:80 check
         server 129957-web-02 52.3.253.242:80 check
