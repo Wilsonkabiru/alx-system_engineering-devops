@@ -9,3 +9,19 @@ sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
 #Save the new iptables rule so that it persists across reboots. You can do this by running the following command.
 sudo sh -c "iptables-save > /etc/iptables/rules.v4"
 #This command saves the current iptables rules to the /etc/iptables/rules.v4 file, which is read during system startup.
+#Run the following command to redirect incoming traffic on port 8080 to port 80
+sudo iptables -A PREROUTING -t nat -p tcp --dport 8080 -j REDIRECT --to-port 80
+#If you want to make this rule persistent, you can install iptables-persistent package.
+sudo apt-get update
+sudo apt-get install iptables-persistent
+#To ensure that your Nginx web server is only listening on port 80, you can make the following changes in your Nginx configuration file.
+#Open your Nginx configuration file using your favorite text editor. The file is usually located at /etc/nginx/nginx.conf.
+#Locate the 'http' block in the configuration file. This is where the main configuration for the HTTP server is specified.
+#Inside the http block, locate the server block that defines the server configuration. It should start with the server keyword and a set of curly braces.
+#Inside the server block, locate the listen directive. This directive specifies the IP address and port number that the server should listen on. By default, Nginx listens on all available IP addresses and port numbers.
+#Change the listen directive to only listen on port 80. You can do this by replacing the current directive with the following.
+listen 80;
+#This will configure Nginx to only listen on port 80 for incoming HTTP requests.#Save the changes to the configuration file and exit your text editor.
+#Restart the Nginx service to apply the changes. You can do this by running the following command.
+sudo service nginx restart
+#After making these changes, your Nginx web server will only listen on port 80 and will ignore any requests to other ports.
