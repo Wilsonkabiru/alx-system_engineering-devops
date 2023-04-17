@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#Configure web-01 so that its firewall redirects port 8080/TCP to port 80/TCP
+#Ensure my web server nginx is only listening on port 80
+#First, make sure you have 'iptables' installed on your system. You can do this by running the following command.
+sudo apt-get install iptables
+#Create a new 'iptables' rule to redirect traffic from port 8080 to port 80. Run the following command to do this
+sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+#This command adds a new rule to the nat table's PREROUTING chain. The rule matches incoming TCP traffic on port 8080 and redirects it to port 80.
+#Save the new iptables rule so that it persists across reboots. You can do this by running the following command.
+sudo sh -c "iptables-save > /etc/iptables/rules.v4"
+#This command saves the current iptables rules to the /etc/iptables/rules.v4 file, which is read during system startup.
