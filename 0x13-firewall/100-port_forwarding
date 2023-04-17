@@ -25,3 +25,9 @@ listen 80;
 #Restart the Nginx service to apply the changes. You can do this by running the following command.
 sudo service nginx restart
 #After making these changes, your Nginx web server will only listen on port 80 and will ignore any requests to other ports.
+#to ensure that netstat shows that nothing is listening on port 8080, you can follow these steps.
+#Open a terminal window.
+#Type the following command and press Enter.
+netstat -ano | findstr :8080
+#This command will display all the active connections and listening ports on your system, and the "findstr" command will filter the output to show only the connections that are using port 8080.
+#In order to make sure that nothing is listening on this port, you can also try to stop any applications or services that might be using it, or you can configure your firewall to block incoming traffic on port 8080.
