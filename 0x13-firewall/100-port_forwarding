@@ -1,33 +1,10 @@
-#!/usr/bin/env bash
-#Configure web-01 so that its firewall redirects port 8080/TCP to port 80/TCP
-#Ensure my web server nginx is only listening on port 80
-#First, make sure you have 'iptables' installed on your system. You can do this by running the following command.
-sudo apt-get install iptables
-#Create a new 'iptables' rule to redirect traffic from port 8080 to port 80. Run the following command to do this
-sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
-#This command adds a new rule to the nat table's PREROUTING chain. The rule matches incoming TCP traffic on port 8080 and redirects it to port 80.
-#Save the new iptables rule so that it persists across reboots. You can do this by running the following command.
-sudo sh -c "iptables-save > /etc/iptables/rules.v4"
-#This command saves the current iptables rules to the /etc/iptables/rules.v4 file, which is read during system startup.
-#Run the following command to redirect incoming traffic on port 8080 to port 80
-sudo iptables -A PREROUTING -t nat -p tcp --dport 8080 -j REDIRECT --to-port 80
-#If you want to make this rule persistent, you can install iptables-persistent package.
-sudo apt-get update
-sudo apt-get install iptables-persistent
-#To ensure that your Nginx web server is only listening on port 80, you can make the following changes in your Nginx configuration file.
-#Open your Nginx configuration file using your favorite text editor. The file is usually located at /etc/nginx/nginx.conf.
-#Locate the 'http' block in the configuration file. This is where the main configuration for the HTTP server is specified.
-#Inside the http block, locate the server block that defines the server configuration. It should start with the server keyword and a set of curly braces.
-#Inside the server block, locate the listen directive. This directive specifies the IP address and port number that the server should listen on. By default, Nginx listens on all available IP addresses and port numbers.
-#Change the listen directive to only listen on port 80. You can do this by replacing the current directive with the following.
-listen 80;
-#This will configure Nginx to only listen on port 80 for incoming HTTP requests.#Save the changes to the configuration file and exit your text editor.
-#Restart the Nginx service to apply the changes. You can do this by running the following command.
-sudo service nginx restart
-#After making these changes, your Nginx web server will only listen on port 80 and will ignore any requests to other ports.
-#to ensure that netstat shows that nothing is listening on port 8080, you can follow these steps.
-#Open a terminal window.
-#Type the following command and press Enter.
-netstat -ano | findstr :8080
-#This command will display all the active connections and listening ports on your system, and the "findstr" command will filter the output to show only the connections that are using port 8080.
-#In order to make sure that nothing is listening on this port, you can also try to stop any applications or services that might be using it, or you can configure your firewall to block incoming traffic on port 8080.
+# /etc/ufw/ufw.conf
+#
+
+# Set to yes to start on boot. If setting this remotely, be sure to add a rule
+# to allow your remote connection before starting ufw. Eg: 'ufw allow 22/tcp'
+ENABLED=no
+
+# Please use the 'ufw' command to set the loglevel. Eg: 'ufw logging medium'.
+# See 'man ufw' for details.
+LOGLEVEL=low
