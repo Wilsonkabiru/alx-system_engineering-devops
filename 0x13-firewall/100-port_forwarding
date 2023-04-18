@@ -16,4 +16,3 @@ DEFAULT_FORWARD_POLICY="ACCEPT"
 # /usr/share/ufw/applications.available/ for all available options.
 # The recommended default is "ufw-deny-all".
 DEFAULT_APPLICATION_POLICY="ufw-deny-all"
-
