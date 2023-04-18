@@ -6,15 +6,8 @@ PASSWORD="$1"
 # Get the current date
 DATE=$(date +"%d-%m-%Y")
 
-# Create a directory to store the backup files
-mkdir -p /backup/mysql
-
 # Dump all databases to the backup.sql file
-mysqldump -u root -p"$PASSWORD" --all-databases > /backup/mysql/backup.sql
+mysqldump -u root -p"$PASSWORD" --all-databases > backup.sql
 
 # Compress the backup.sql file to a tar.gz archive
-tar -czvf /backup/mysql/"$DATE.tar.gz" /backup/mysql/backup.sql
-
-# Remove the backup.sql file
-rm /backup/mysql/backup.sql
-
+tar -czvf "$DATE.tar.gz" backup.sql
