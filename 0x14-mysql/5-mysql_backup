@@ -1,4 +1,4 @@
-#!/usr/bin/env/bash
+#!/bin/bash
 
 # Get the password for the MySQL root user
 PASSWORD="$1"
